@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-**Please note:** this package is new and hasn't yet been extensively tested. Use due diligence when handling sensitive or confidential data.
+**IMPORTANT MESSAGE:** this package is new and hasn't yet been extensively tested. Use due diligence when handling sensitive or confidential data.
 
 # Installation
 
@@ -40,7 +40,7 @@ patient_data <- data.frame(MRN = MRNs, DOB = DOBs,
 patient_data
 ```
 
-There are two variables in this data frame containing personally identifying information: `MRN` and `DOB`. We could just remove these columns and generate a random ID number for each patient, but that would make it difficult to match the patients if we wanted to merge two data frames together. The solution is to generate a unique ID code, a cryptographic hash (SHA-256), from the identifying columns. This type of hash has two useful properties: it is very unlikely that the same hash would be generated for two people who have different information; and it is near impossible to recover the personal information from the hash.
+There are two variables in this data frame containing personally identifying information: `MRN` and `DOB`. We could just remove these columns and generate a random ID number for each patient, but that would make it difficult to match the patients if we wanted to merge two data frames together. The solution is to generate a unique ID code, a cryptographic hash (SHA-256), from the identifying columns. This type of hash has two useful properties: it is very unlikely that the same hash would be generated for two people who have different information; and it is near impossible to recover the personal information from the hash. For most datasets, using only the first ten characters of the hash is sufficient to generate unique IDs.
 
 We can generate these unique IDs with the `deidentify()` function. The first argument to `deidentify()` is the data frame, and after that we can list the columns from which to generate the IDs.
 

@@ -1,6 +1,7 @@
 
-**Please note:** this package is new and hasn’t yet been extensively
-tested. Use due diligence when handling sensitive or confidential data.
+**IMPORTANT MESSAGE:** this package is new and hasn’t yet been
+extensively tested. Use due diligence when handling sensitive or
+confidential data.
 
 # Installation
 
@@ -46,6 +47,8 @@ cryptographic hash (SHA-256), from the identifying columns. This type of
 hash has two useful properties: it is very unlikely that the same hash
 would be generated for two people who have different information; and it
 is near impossible to recover the personal information from the hash.
+For most datasets, using only the first ten characters of the hash is
+sufficient to generate unique IDs.
 
 We can generate these unique IDs with the `deidentify()` function. The
 first argument to `deidentify()` is the data frame, and after that we
