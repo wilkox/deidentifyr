@@ -75,9 +75,6 @@ means that a different data frame deidentified in the same way will have
 the same IDs for each patient.
 
 ``` r
-sexes <- sample(c("F", "M"), n, replace = T)
-patient_data2 <- data.frame(MRN = MRNs, DOB = DOBs, 
-                           sex = sexes)
 patient_data2
 #>         MRN        DOB sex
 #> 1  33895779 1984-02-18   F

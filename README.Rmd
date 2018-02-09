@@ -56,10 +56,13 @@ The `MRN` and `DOB` columns have been removed, and replaced with a new column ca
 
 The same identifying details will always generate the same hash. This means that a different data frame deidentified in the same way will have the same IDs for each patient.
 
-```{r}
+```{r, include = FALSE}
 sexes <- sample(c("F", "M"), n, replace = T)
 patient_data2 <- data.frame(MRN = MRNs, DOB = DOBs, 
                            sex = sexes)
+```
+
+```{r}
 patient_data2
 patient_data2 <- deidentify(patient_data2, DOB, MRN)
 patient_data2
