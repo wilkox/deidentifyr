@@ -3,7 +3,7 @@ Title: Deidentify Datasets
 Version: 0.1.0
 Authors@R: person("David", "Wilkins", email = "david@wilkox.org", role = c("aut", "cre"))
 Description: Provides a function to deidentify a data frame or tibble that contains personally identifying information.
-Depends: R (>= 3.1),
+Depends: R (>= 3.3),
 Imports: digest (>= 0.6.15)
 License: GPL (>=3)
 Encoding: UTF-8
