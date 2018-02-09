@@ -1,20 +1,23 @@
-# Some example data
-library(tidyverse)
-library(lubridate)
-set.seed(1)
-n <- 10000
-MRNs <- sample(10000000:99999999, n)
-DOBs <- today() - dyears(sample(18:99, n, replace = T))
-times_in_hospital <- sample(1:100, n, replace = T)
-patient_data <- data.frame(MRN = MRNs, DOB = DOBs, time_in_hospital = times_in_hospital)
-
-data <- patient_data
-columns <- c("MRN", "DOB")
-
-patient_data <- as.tibble(patient_data)
-deidentify(patient_data, MRN, DOB)
-
-# Function to deidentify information
+#' Deidentify a data frame.
+#'
+#' `deidentify()` will generate a unique ID from personally identifying
+#' information. Because the IDs are generated with the SHA-256 algorithm, they
+#' are a) very unlikely to be the same for people with different identifying
+#' information, and b) nearly impossible to recover the identifying information
+#' from.
+#'
+#' This function uses non-standard evaluation for column names in `data`, so
+#' there's no need to surround them with quotation marks.
+#'
+#' @param data A data frame (or tibble).
+#' @param ... A list of the columns in `data` that contain personally
+#' identifying information, from which the unique IDs will be generated.
+#' @param key The name of the column to create containing unique IDs, "id" by
+#' default.
+#' @param drop A logical value, TRUE by default, indicating whether to remove
+#' the personally identifying columns after the IDs are created.
+#'
+#' @export
 deidentify <- function(data, ..., key = "id", drop = TRUE) {
 
   # Capture columns with the magic of NSE
@@ -56,6 +59,7 @@ deidentify <- function(data, ..., key = "id", drop = TRUE) {
   } else {
     data <- cbind(data.frame(id = hashes, stringsAsFactors = F), data)
   }
+  names(data)[1] <- key
 
   # Drop the identifying columns, if wanted
   if (drop) {
