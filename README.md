@@ -17,13 +17,6 @@ devtools::install_github('wilkox/deidentifyr')
 Here’s an example dataset containing some patient data.
 
 ``` r
-set.seed(1)
-n <- 10
-MRNs <- sample(10000000:99999999, n)
-DOBs <- lubridate::today() - lubridate::dyears(sample(18:99, n, replace = T))
-times_in_hospital <- sample(1:100, n, replace = T)
-patient_data <- data.frame(MRN = MRNs, DOB = DOBs, 
-                           time_in_hospital = times_in_hospital)
 patient_data
 #>         MRN        DOB time_in_hospital
 #> 1  33895779 1984-02-18               94
