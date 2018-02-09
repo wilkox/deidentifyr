@@ -48,8 +48,8 @@ would be generated for two people who have different information; and it
 is near impossible to recover the personal information from the hash.
 
 We can generate these unique IDs with the `deidentify()` function. The
-first argument to `deidentify()` is the data fame, and after that we can
-list the columns from which to generate the IDs.
+first argument to `deidentify()` is the data frame, and after that we
+can list the columns from which to generate the IDs.
 
 ``` r
 library(deidentifyr)
@@ -74,9 +74,9 @@ don’t want to remove the original columns, `deidentify()` can be
 called with the argument `drop = FALSE`. You can also choose a different
 name for the ID column with `key = "name"`.
 
-The same values for each identifying column will always generate the
-same hash. This means that a different data frame deidentified in the
-same way will have the same IDs for each patient.
+The same identifying details will always generate the same hash. This
+means that a different data frame deidentified in the same way will have
+the same IDs for each patient.
 
 ``` r
 sexes <- sample(c("F", "M"), n, replace = T)
@@ -109,8 +109,7 @@ patient_data2
 #> 10 cfac1d6216   F
 ```
 
-Note that the ID hashes are identical in `patient_data` and
-`patient_data2` even though we listed the identifying columns in a
+Note that it didn’t matter that we listed the identifying columns in a
 different order the second time we called `deidentify()`. We can now
 match patients between the data frames without needing to reidentify
 them.
