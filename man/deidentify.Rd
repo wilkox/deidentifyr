@@ -2,15 +2,17 @@
 % Please edit documentation in R/deidentify.R
 \name{deidentify}
 \alias{deidentify}
-\title{Deidentify a data frame.}
+\title{Deidentify a dataset.}
 \usage{
-deidentify(data, ..., key = "id", drop = TRUE)
+deidentify(data, ..., salt = NULL, key = "id", drop = TRUE)
 }
 \arguments{
 \item{data}{A data frame (or tibble).}
 
 \item{...}{A list of the columns in `data` that contain personally
 identifying information, from which the unique IDs will be generated.}
+
+\item{salt}{An optional salt (see Details).}
 
 \item{key}{The name of the column to create containing unique IDs, "id" by
 default.}
@@ -28,4 +30,11 @@ from.
 \details{
 This function uses non-standard evaluation for column names in `data`, so
 there's no need to surround them with quotation marks.
+
+Optionally, a salt can be added to the personally identifying information. A
+salt is an extra piece of text, usually kept secret, that will change the
+resulting IDs. This makes it harder for somebody to re-identify people in
+the data set by generating IDs from a list of potential inputs. However, you
+will need to use the same salt every time you deidentify datasets from the
+same cohort if you want to be able to cross-reference people by ID.
 }

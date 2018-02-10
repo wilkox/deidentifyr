@@ -1,4 +1,4 @@
-#' Deidentify a data frame.
+#' Deidentify a dataset.
 #'
 #' `deidentify()` will generate a unique ID from personally identifying
 #' information. Because the IDs are generated with the SHA-256 algorithm, they
@@ -6,27 +6,34 @@
 #' information, and b) nearly impossible to recover the identifying information
 #' from.
 #'
+#' @details
 #' This function uses non-standard evaluation for column names in `data`, so
 #' there's no need to surround them with quotation marks.
+#'
+#' Optionally, a salt can be added to the personally identifying information. A
+#' salt is an extra piece of text, usually kept secret, that will change the
+#' resulting IDs. This makes it harder for somebody to re-identify people in
+#' the data set by generating IDs from a list of potential inputs. However, you
+#' will need to use the same salt every time you deidentify datasets from the
+#' same cohort if you want to be able to cross-reference people by ID.
 #'
 #' @param data A data frame (or tibble).
 #' @param ... A list of the columns in `data` that contain personally
 #' identifying information, from which the unique IDs will be generated.
+#' @param salt An optional salt (see Details).
 #' @param key The name of the column to create containing unique IDs, "id" by
 #' default.
 #' @param drop A logical value, TRUE by default, indicating whether to remove
 #' the personally identifying columns after the IDs are created.
 #'
 #' @export
-deidentify <- function(data, ..., key = "id", drop = TRUE) {
+deidentify <- function(data, ..., salt = NULL, key = "id", drop = TRUE) {
 
   # Capture columns with the magic of NSE
   columns <- as.character(eval(substitute(alist(...))))
 
   # Ensure the data doesn't already contain a column with the key name
-  if (key %in% names(data)) {
-    stop("data already contains a column named ", key)
-  }
+  if (key %in% names(data)) stop("data already contains a column named ", key)
 
   # Check that observations are unique for the selected columns
   unique_obs <- nrow(unique(data[, columns]))
@@ -38,9 +45,16 @@ deidentify <- function(data, ..., key = "id", drop = TRUE) {
   # different data frames by accidentally listing the columns in the wrong order
   columns <- sort(columns)
 
-  # Paste and hash columns, keeping only 10 characters of the hash
-  # Using the SHA-256 algorithm
+  # Paste the columns to generate the input for the hash, adding a salt if
+  # wanted
   input <- apply(data[, columns], 1, paste, collapse = "")
+  if (!is.null(salt)) {
+    if (! is.character(salt)) stop("salt must be a character vector")
+    if (length(salt) != 1) stop("salt must be a single string")
+    input <- paste0(input, salt)
+  }
+
+  # Hash the input with SHA-256, keeping only the first ten characters
   hashes <- sapply(input, digest::digest, algo = "sha256", USE.NAMES = F)
   hashes <- substr(hashes, 0, 10)
 
