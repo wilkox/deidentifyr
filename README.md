@@ -143,7 +143,9 @@ regenerate the same IDs from a different dataset if you wanted, by
 adding the same salt, so your ability to match patients between
 deidentified datasets will not be lost. However, unless the bad actor
 manages to discover your secret salt, they will not be able to generate
-a list of potential IDs from which to reidentify the patients.
+a list of potential IDs from which to reidentify the patients. You can
+add a salt by calling `deidentify()` with the extra argument `salt =
+"mysalt"`.
 
 Decisions about using or not using a salt, how to keep the salt a
 secret, and what personally identifying information to include in the

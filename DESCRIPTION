@@ -1,6 +1,6 @@
 Package: deidentifyr
 Title: Deidentify Datasets
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: person("David", "Wilkins", email = "david@wilkox.org", role = c("aut", "cre"))
 Description: Provides a function to deidentify a data frame or tibble that contains personally identifying information.
 Depends: R (>= 3.3),
