@@ -1,7 +1,8 @@
 
-**IMPORTANT MESSAGE:** this package is still under development and
-hasn’t yet been extensively tested. Use due diligence when handling
-sensitive or confidential data.
+# Important message
+
+This package is still under development and hasn’t yet been extensively
+tested. Use due diligence when handling sensitive or confidential data.
 
 # Installation
 
@@ -53,16 +54,16 @@ library(deidentifyr)
 patient_data <- deidentify(patient_data, MRN, DOB)
 patient_data
 #>            id days_in_hospital
-#> 1  9d806810e3               94
-#> 2  4dade63947               22
-#> 3  8d170f05bd               66
-#> 4  fc0a11c502               13
-#> 5  15414c15be               27
-#> 6  babc064c8b               39
-#> 7  48bf63758e                2
-#> 8  73589a05c5               39
-#> 9  2a1af5d030               87
-#> 10 53a943e617               35
+#> 1  79c8ebe8df               94
+#> 2  45741189ad               22
+#> 3  6880bc33e8               66
+#> 4  12682b09dc               13
+#> 5  da7ebc4242               27
+#> 6  6df120b168               39
+#> 7  f3c0b8d292                2
+#> 8  9a1e82e7c4               39
+#> 9  45d3646903               87
+#> 10 403edc1d1c               35
 ```
 
 The `MRN` and `DOB` columns have been removed, and replaced with a new
@@ -91,16 +92,16 @@ patient_data2
 patient_data2 <- deidentify(patient_data2, DOB, MRN)
 patient_data2
 #>            id sex
-#> 1  9d806810e3   F
-#> 2  4dade63947   M
-#> 3  8d170f05bd   F
-#> 4  fc0a11c502   F
-#> 5  15414c15be   M
-#> 6  babc064c8b   M
-#> 7  48bf63758e   M
-#> 8  73589a05c5   F
-#> 9  2a1af5d030   M
-#> 10 53a943e617   F
+#> 1  79c8ebe8df   F
+#> 2  45741189ad   M
+#> 3  6880bc33e8   F
+#> 4  12682b09dc   F
+#> 5  da7ebc4242   M
+#> 6  6df120b168   M
+#> 7  f3c0b8d292   M
+#> 8  9a1e82e7c4   F
+#> 9  45d3646903   M
+#> 10 403edc1d1c   F
 ```
 
 Note that it didn’t matter that we listed the identifying columns in a
@@ -112,16 +113,16 @@ them.
 combined_data <- merge(patient_data, patient_data2, by = "id")
 combined_data
 #>            id days_in_hospital sex
-#> 1  15414c15be               27   M
-#> 2  2a1af5d030               87   M
-#> 3  48bf63758e                2   M
-#> 4  4dade63947               22   M
-#> 5  53a943e617               35   F
-#> 6  73589a05c5               39   F
-#> 7  8d170f05bd               66   F
-#> 8  9d806810e3               94   F
-#> 9  babc064c8b               39   M
-#> 10 fc0a11c502               13   F
+#> 1  12682b09dc               13   F
+#> 2  403edc1d1c               35   F
+#> 3  45741189ad               22   M
+#> 4  45d3646903               87   M
+#> 5  6880bc33e8               66   F
+#> 6  6df120b168               39   M
+#> 7  79c8ebe8df               94   F
+#> 8  9a1e82e7c4               39   F
+#> 9  da7ebc4242               27   M
+#> 10 f3c0b8d292                2   M
 ```
 
 ## Salting

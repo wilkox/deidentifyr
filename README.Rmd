@@ -15,7 +15,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-**IMPORTANT MESSAGE:** this package is still under development and hasn't yet been extensively tested. Use due diligence when handling sensitive or confidential data.
+# Important message
+
+This package is still under development and hasn't yet been extensively tested. Use due diligence when handling sensitive or confidential data.
 
 # Installation
 

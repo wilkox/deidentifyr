@@ -55,7 +55,7 @@ deidentify <- function(data, ..., salt = NULL, key = "id", drop = TRUE) {
   }
 
   # Hash the input with SHA-256, keeping only the first ten characters
-  hashes <- sapply(input, digest::digest, algo = "sha256", USE.NAMES = F)
+  hashes <- sapply(input, openssl::sha256, USE.NAMES = F)
   hashes <- substr(hashes, 0, 10)
 
   # Warn if there is a hash collision
