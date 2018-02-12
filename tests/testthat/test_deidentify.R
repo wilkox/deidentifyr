@@ -3,14 +3,29 @@ context("deidentify()")
 MRNs <- 1:10
 ages <- 18:27
 times_in_hospital <- 1:10
-patient_data <- data.frame(MRN = MRNs, age = ages, 
-                           time_in_hospital = times_in_hospital)
-
+patient_data <- data.frame(
+  MRN = MRNs,
+  age = ages,
+  time_in_hospital = times_in_hospital
+)
+hashes <- c(
+  "580811fa95",
+  "eb3be230bb",
+  "4621c1d55f",
+  "802b906a18",
+  "0e65238108",
+  "9a049b03f6",
+  "396f804443",
+  "a30f4ef421",
+  "f747870ae6",
+  "162e3973ec"
+)
 
 test_that("Cryptographic hashes are created from identifying columns", {
   expect_silent(deidentified <- deidentify(patient_data, MRN, age))
   expect_true(is.character(deidentified$id))
   expect_equal(unique(nchar(deidentified$id)), 10)
+  expect_equal(deidentified$id, hashes)
 })
 
 test_that("Columns are not dropped if requested", {

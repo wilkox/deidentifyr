@@ -43,7 +43,7 @@ deidentify <- function(data, ..., salt = NULL, key = "id", drop = TRUE) {
 
   # Sort columns, to reduce the chance of creating different hashes from
   # different data frames by accidentally listing the columns in the wrong order
-  columns <- sort(columns)
+  columns <- stringi::stri_sort(columns)
 
   # Paste the columns to generate the input for the hash, adding a salt if
   # wanted
