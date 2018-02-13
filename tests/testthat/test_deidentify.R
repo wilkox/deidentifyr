@@ -39,8 +39,10 @@ test_that("Hash column takes a custom name", {
 })
 
 test_that("Salting works", {
-  expect_silent(deidentified_salt <- deidentify(patient_data, MRN, age, salt = "kosher", 
-                                                key = "hash"))
+  expect_silent(deidentified_salt <- deidentify(
+    patient_data, MRN, age, salt = "kosher",
+    key = "hash"
+  ))
   deidentified <- deidentify(patient_data, MRN, age, key = "hash")
   expect_false(all(deidentified$hash == deidentified_salt$hash))
 })

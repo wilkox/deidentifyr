@@ -58,7 +58,7 @@ deidentify <- function(
   # wanted
   input <- apply(data[, columns], 1, paste, collapse = "")
   if (!is.null(salt)) {
-    if (! is.character(salt)) stop("salt must be a character vector")
+    if (!is.character(salt)) stop("salt must be a character vector")
     if (length(salt) != 1) stop("salt must be a single string")
     input <- paste0(input, salt)
   }
