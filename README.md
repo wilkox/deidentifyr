@@ -17,21 +17,6 @@ devtools::install_github('wilkox/deidentifyr')
 
 Here’s an example dataset containing some patient data.
 
-``` r
-patient_data
-#>         MRN        DOB days_in_hospital
-#> 1  33895779 1984-02-19               94
-#> 2  43491150 1986-02-18               22
-#> 3  61556802 1944-02-29               66
-#> 4  91738701 1969-02-22               13
-#> 5  28151373 1937-03-02               27
-#> 6  90855071 1960-02-25               39
-#> 7  95020774 1942-03-01                2
-#> 8  69471801 1919-03-07               39
-#> 9  66620263 1969-02-22               87
-#> 10 15560764 1937-03-02               35
-```
-
 There are two variables in this data frame containing personally
 identifying information: `MRN` and `DOB`. We could just remove these
 columns and generate a random ID number for each patient, but that would
@@ -54,16 +39,16 @@ library(deidentifyr)
 patient_data <- deidentify(patient_data, MRN, DOB)
 patient_data
 #>            id days_in_hospital
-#> 1  79c8ebe8df               94
-#> 2  45741189ad               22
-#> 3  6880bc33e8               66
-#> 4  12682b09dc               13
-#> 5  da7ebc4242               27
-#> 6  6df120b168               39
-#> 7  f3c0b8d292                2
-#> 8  9a1e82e7c4               39
-#> 9  45d3646903               87
-#> 10 403edc1d1c               35
+#> 1  4a7d7e8372               94
+#> 2  67336b0655               22
+#> 3  f12662ca33               66
+#> 4  0eb7bbc62f               13
+#> 5  19c581e854               27
+#> 6  6c52c293fb               39
+#> 7  fc4d74d412                2
+#> 8  1e158a3656               39
+#> 9  cc09e55d3a               87
+#> 10 9b3dd2c166               35
 ```
 
 The `MRN` and `DOB` columns have been removed, and replaced with a new
@@ -79,29 +64,29 @@ the same IDs for each patient.
 ``` r
 patient_data2
 #>         MRN        DOB sex
-#> 1  33895779 1984-02-19   F
-#> 2  43491150 1986-02-18   M
-#> 3  61556802 1944-02-29   F
-#> 4  91738701 1969-02-22   F
-#> 5  28151373 1937-03-02   M
-#> 6  90855071 1960-02-25   M
-#> 7  95020774 1942-03-01   M
-#> 8  69471801 1919-03-07   F
-#> 9  66620263 1969-02-22   M
-#> 10 15560764 1937-03-02   F
+#> 1  33895779 1984-02-22   F
+#> 2  43491150 1986-02-21   M
+#> 3  61556802 1944-03-03   F
+#> 4  91738701 1969-02-25   F
+#> 5  28151373 1937-03-05   M
+#> 6  90855071 1960-02-28   M
+#> 7  95020774 1942-03-04   M
+#> 8  69471801 1919-03-10   F
+#> 9  66620263 1969-02-25   M
+#> 10 15560764 1937-03-05   F
 patient_data2 <- deidentify(patient_data2, DOB, MRN)
 patient_data2
 #>            id sex
-#> 1  79c8ebe8df   F
-#> 2  45741189ad   M
-#> 3  6880bc33e8   F
-#> 4  12682b09dc   F
-#> 5  da7ebc4242   M
-#> 6  6df120b168   M
-#> 7  f3c0b8d292   M
-#> 8  9a1e82e7c4   F
-#> 9  45d3646903   M
-#> 10 403edc1d1c   F
+#> 1  4a7d7e8372   F
+#> 2  67336b0655   M
+#> 3  f12662ca33   F
+#> 4  0eb7bbc62f   F
+#> 5  19c581e854   M
+#> 6  6c52c293fb   M
+#> 7  fc4d74d412   M
+#> 8  1e158a3656   F
+#> 9  cc09e55d3a   M
+#> 10 9b3dd2c166   F
 ```
 
 Note that it didn’t matter that we listed the identifying columns in a
@@ -113,16 +98,16 @@ them.
 combined_data <- merge(patient_data, patient_data2, by = "id")
 combined_data
 #>            id days_in_hospital sex
-#> 1  12682b09dc               13   F
-#> 2  403edc1d1c               35   F
-#> 3  45741189ad               22   M
-#> 4  45d3646903               87   M
-#> 5  6880bc33e8               66   F
-#> 6  6df120b168               39   M
-#> 7  79c8ebe8df               94   F
-#> 8  9a1e82e7c4               39   F
-#> 9  da7ebc4242               27   M
-#> 10 f3c0b8d292                2   M
+#> 1  0eb7bbc62f               13   F
+#> 2  19c581e854               27   M
+#> 3  1e158a3656               39   F
+#> 4  4a7d7e8372               94   F
+#> 5  67336b0655               22   M
+#> 6  6c52c293fb               39   M
+#> 7  9b3dd2c166               35   F
+#> 8  cc09e55d3a               87   M
+#> 9  f12662ca33               66   F
+#> 10 fc4d74d412                2   M
 ```
 
 ## Salting

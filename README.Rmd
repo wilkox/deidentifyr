@@ -39,8 +39,6 @@ DOBs <- lubridate::today() - lubridate::dyears(sample(18:99, n, replace = T))
 days_in_hospitals <- sample(1:100, n, replace = T)
 patient_data <- data.frame(MRN = MRNs, DOB = DOBs, 
                            days_in_hospital = days_in_hospitals)
-
-```{r}
 patient_data
 ```
 
