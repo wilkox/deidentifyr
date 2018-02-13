@@ -25,9 +25,18 @@
 #' default.
 #' @param drop A logical value, TRUE by default, indicating whether to remove
 #' the personally identifying columns after the IDs are created.
+#' @param warn_duplicates A logical value, TRUE, by default, indicating whether
+#' to emit a warning if there are duplicate input rows or produced IDs.
 #'
 #' @export
-deidentify <- function(data, ..., salt = NULL, key = "id", drop = TRUE) {
+deidentify <- function(
+  data,
+  ...,
+  salt = NULL,
+  key = "id",
+  drop = TRUE,
+  warn_duplicates = TRUE
+) {
 
   # Capture columns with the magic of NSE
   columns <- as.character(eval(substitute(alist(...))))
@@ -37,7 +46,7 @@ deidentify <- function(data, ..., salt = NULL, key = "id", drop = TRUE) {
 
   # Check that observations are unique for the selected columns
   unique_obs <- nrow(unique(data[, columns]))
-  if (unique_obs != nrow(data)) {
+  if (unique_obs != nrow(data) & warn_duplicates) {
     warning("Duplicate rows found in selected columns - duplicate ids will be produced")
   }
 
@@ -60,7 +69,7 @@ deidentify <- function(data, ..., salt = NULL, key = "id", drop = TRUE) {
 
   # Warn if there is a hash collision
   unique_hashes <- length(unique(hashes))
-  if (unique_hashes != length(input)) {
+  if (unique_hashes != length(input) & warn_duplicates) {
     warning("A hash collision (duplicate ids) was produced")
   }
 

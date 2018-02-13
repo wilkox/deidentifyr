@@ -4,7 +4,8 @@
 \alias{deidentify}
 \title{Deidentify a dataset.}
 \usage{
-deidentify(data, ..., salt = NULL, key = "id", drop = TRUE)
+deidentify(data, ..., salt = NULL, key = "id", drop = TRUE,
+  warn_duplicates = TRUE)
 }
 \arguments{
 \item{data}{A data frame (or tibble).}
@@ -19,6 +20,9 @@ default.}
 
 \item{drop}{A logical value, TRUE by default, indicating whether to remove
 the personally identifying columns after the IDs are created.}
+
+\item{warn_duplicates}{A logical value, TRUE, by default, indicating whether
+to emit a warning if there are duplicate input rows or produced IDs.}
 }
 \description{
 `deidentify()` will generate a unique ID from personally identifying

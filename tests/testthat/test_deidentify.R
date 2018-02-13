@@ -44,3 +44,13 @@ test_that("Salting works", {
   deidentified <- deidentify(patient_data, MRN, age, key = "hash")
   expect_false(all(deidentified$hash == deidentified_salt$hash))
 })
+
+dupes <- rbind(patient_data, patient_data[1, ])
+
+test_that("Duplicate inputs produce a warning", {
+  expect_warning(deidentify(dupes, MRN, age, drop = F))
+})
+
+test_that("`warn_duplicates` is respected", {
+  expect_silent(deidentified <- deidentify(dupes, MRN, age, warn_duplicates = F))
+})
