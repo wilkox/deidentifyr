@@ -15,6 +15,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![CRAN status](https://www.r-pkg.org/badges/version/deidentifyr)](https://cran.r-project.org/package=deidentifyr)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 # Important message
 
 This package is still under development and hasn't yet been extensively tested. Use due diligence when handling sensitive or confidential data.

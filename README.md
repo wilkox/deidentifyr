@@ -1,4 +1,8 @@
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/deidentifyr)](https://cran.r-project.org/package=deidentifyr)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 # Important message
 
 This package is still under development and hasn’t yet been extensively
@@ -39,16 +43,16 @@ library(deidentifyr)
 patient_data <- deidentify(patient_data, MRN, DOB)
 patient_data
 #>            id days_in_hospital
-#> 1  4a7d7e8372               94
-#> 2  67336b0655               22
-#> 3  f12662ca33               66
-#> 4  0eb7bbc62f               13
-#> 5  19c581e854               27
-#> 6  6c52c293fb               39
-#> 7  fc4d74d412                2
-#> 8  1e158a3656               39
-#> 9  cc09e55d3a               87
-#> 10 9b3dd2c166               35
+#> 1  f58a379a54               94
+#> 2  cce440c5bd               22
+#> 3  dc670951be               66
+#> 4  234f0adeb4               13
+#> 5  184cde82b6               27
+#> 6  1f2a3527a0               39
+#> 7  bce298677f                2
+#> 8  41582e0e27               39
+#> 9  46e1c69542               87
+#> 10 6d93cb09ee               35
 ```
 
 The `MRN` and `DOB` columns have been removed, and replaced with a new
@@ -64,29 +68,29 @@ the same IDs for each patient.
 ``` r
 patient_data2
 #>         MRN        DOB sex
-#> 1  33895779 1984-02-22   F
-#> 2  43491150 1986-02-21   M
-#> 3  61556802 1944-03-03   F
-#> 4  91738701 1969-02-25   F
-#> 5  28151373 1937-03-05   M
-#> 6  90855071 1960-02-28   M
-#> 7  95020774 1942-03-04   M
-#> 8  69471801 1919-03-10   F
-#> 9  66620263 1969-02-25   M
-#> 10 15560764 1937-03-05   F
+#> 1  33895779 1985-02-20   F
+#> 2  43491150 1987-02-20   M
+#> 3  61556802 1945-03-02   F
+#> 4  91738701 1970-02-24   F
+#> 5  28151373 1938-03-04   M
+#> 6  90855071 1961-02-26   M
+#> 7  95020774 1943-03-03   M
+#> 8  69471801 1920-03-08   F
+#> 9  66620263 1970-02-24   M
+#> 10 15560764 1938-03-04   F
 patient_data2 <- deidentify(patient_data2, DOB, MRN)
 patient_data2
 #>            id sex
-#> 1  4a7d7e8372   F
-#> 2  67336b0655   M
-#> 3  f12662ca33   F
-#> 4  0eb7bbc62f   F
-#> 5  19c581e854   M
-#> 6  6c52c293fb   M
-#> 7  fc4d74d412   M
-#> 8  1e158a3656   F
-#> 9  cc09e55d3a   M
-#> 10 9b3dd2c166   F
+#> 1  f58a379a54   F
+#> 2  cce440c5bd   M
+#> 3  dc670951be   F
+#> 4  234f0adeb4   F
+#> 5  184cde82b6   M
+#> 6  1f2a3527a0   M
+#> 7  bce298677f   M
+#> 8  41582e0e27   F
+#> 9  46e1c69542   M
+#> 10 6d93cb09ee   F
 ```
 
 Note that it didn’t matter that we listed the identifying columns in a
@@ -98,16 +102,16 @@ them.
 combined_data <- merge(patient_data, patient_data2, by = "id")
 combined_data
 #>            id days_in_hospital sex
-#> 1  0eb7bbc62f               13   F
-#> 2  19c581e854               27   M
-#> 3  1e158a3656               39   F
-#> 4  4a7d7e8372               94   F
-#> 5  67336b0655               22   M
-#> 6  6c52c293fb               39   M
-#> 7  9b3dd2c166               35   F
-#> 8  cc09e55d3a               87   M
-#> 9  f12662ca33               66   F
-#> 10 fc4d74d412                2   M
+#> 1  184cde82b6               27   M
+#> 2  1f2a3527a0               39   M
+#> 3  234f0adeb4               13   F
+#> 4  41582e0e27               39   F
+#> 5  46e1c69542               87   M
+#> 6  6d93cb09ee               35   F
+#> 7  bce298677f                2   M
+#> 8  cce440c5bd               22   M
+#> 9  dc670951be               66   F
+#> 10 f58a379a54               94   F
 ```
 
 ## Salting
